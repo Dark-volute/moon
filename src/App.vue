@@ -1,16 +1,24 @@
 <template>
   <div id="app">
-    <Button/>
+    <m-button :loading='loading' @click='loading = ! loading' >按钮</m-button>
+    <m-button icon='settings'>按钮</m-button>
+    <m-button icon='settings' icon-position="right" :loading='true'>按钮</m-button>
   </div>
 </template>
 
 <script>
-import Button from './components/Button.vue'
+import mButton from './components/Button.vue'
+import './components/svg.js'
 
 export default {
   name: 'app',
+  data(){
+    return {
+      loading:false
+    }
+  },
   components: {
-    Button
+    mButton,
   }
 }
 </script>
