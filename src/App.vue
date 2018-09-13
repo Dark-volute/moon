@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <m-button :loading='loading' @click='loading = ! loading' >按钮</m-button>
+    <m-button :loading='loading' @click='loading = !loading' >按钮</m-button>
     <m-button icon='settings'>按钮</m-button>
     <m-button icon='settings' icon-position="right" :loading='true'>按钮</m-button>
   </div>
@@ -14,7 +14,7 @@ export default {
   name: 'app',
   data(){
     return {
-      loading:false
+        loading: false
     }
   },
   components: {
