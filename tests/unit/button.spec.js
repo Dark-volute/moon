@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import { shallowMount, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import Button from '@/components/Button.vue'
 chai.use(sinonChai)
 
@@ -31,7 +31,7 @@ describe('Button.vue', () => {
         expect(useElements[0].getAttribute('xlink:href')).to.equal('#i-loading')
     })
 
-    xit('icon 默认的 order 是 1', () => {
+    it('icon 默认的 order 是 1', () => {
         const wrapper = mount(Button, {
             attachToDocument: true,
             propsData: {

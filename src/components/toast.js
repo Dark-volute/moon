@@ -2,7 +2,6 @@ import Toast from './toast.vue'
 
 
 let currentToast
-let mask
 export default {
     install (Vue, options) {
         Vue.prototype.$toast = function (message, toastOptions) {
