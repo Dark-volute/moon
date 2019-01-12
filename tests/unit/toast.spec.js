@@ -1,5 +1,5 @@
 import chai, { expect } from 'chai'
-import Toast from '@/components/toast.vue'
+import Toast from '@/components/toast/toast.vue'
 import { mount } from '@vue/test-utils'
 
 describe('Toast.vue', () => {

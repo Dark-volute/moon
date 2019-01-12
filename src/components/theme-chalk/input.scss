@@ -1,0 +1,23 @@
+@include b(input){
+    outline: none;
+    border: none;
+    border-radius: $border-radius;
+    padding:4px 8px;
+    border: 1px solid #dcdfe6;
+    transition: border .3s;
+    box-sizing: border-box;
+    height:30px;
+    line-height: 30px;
+    &.error{
+        border: 1px solid $red;
+    }
+    &:focus{
+        border: 1px solid $blue;
+    }
+    &.error:focus{
+        border: 1px solid $red;
+    }
+    &::-webkit-input-placeholder{
+        color: #dcdfe6;
+}
+}

@@ -1,0 +1,26 @@
+@include b(form) {
+  @include b(form-item) {
+    height: 50px;
+    display: flex;
+    &>.label{
+       height: 30px;
+       line-height: 30px;
+       margin-right: 10px;
+       text-align: right;
+       width:80px;
+    }
+
+    @include e(message) {
+     font-size: $font-size-small;
+      color: $red;
+    }
+
+
+    @include e(label-required) {
+      &:before {
+        content: '* ';
+        color: $red;
+      }
+    }
+  }
+}

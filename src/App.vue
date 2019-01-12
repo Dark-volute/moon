@@ -3,12 +3,17 @@
         <!-- <m-button :loading='loading' @click='loading = !loading' >按钮</m-button>
         <m-button icon='settings'>按钮</m-button>
         <m-button icon='settings' icon-position="right" :loading='true'>按钮</m-button> -->
-        <m-row justify='space-between' type='flex'>
+        <!-- <m-row justify='space-between' type='flex'>
            <m-col :span='6' style='border:1px solid red'>1</m-col>
            <m-col :span='6' style='border:1px solid red'>2</m-col>
            <m-col :span='6' style='border:1px solid red'>3</m-col> 
         </m-row>
-        <span class='hidden-xs-only'>123</span>
+        <span class='hidden-xs-only'>123</span> -->
+          <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view/>
     </div>
 </template>
 
@@ -16,7 +21,6 @@
 <script>
 import Vue from 'vue'
 import mButton from './components/button/button.vue'
-
 export default {
   name: 'app',
   data() {
@@ -93,3 +97,4 @@ export default {
 
 <style>
 </style>
+

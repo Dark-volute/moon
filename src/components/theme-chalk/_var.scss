@@ -8,9 +8,11 @@ $button-bg: white;
 $button-height: 32px;
 $color: #333;
 $font-size: 14px;
+$font-size-small: 12px;
 $input-height: 32px;
-$red: #F1453D;
+$red: #f56c6c;
 $grey: #eee;
+$blue:#409eff;
 
 
 $namespace: 'm';
@@ -51,7 +53,6 @@ $--breakpoints-spec: (
 .box-shadow {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
-
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
