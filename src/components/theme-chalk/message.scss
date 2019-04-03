@@ -1,0 +1,48 @@
+$m-message--success: #f0f9eb;
+$m-message--warning: #fdf6ec;
+$m-message--danger: #fef0f0;
+
+
+.m-message {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top:20px;
+  width: 380px;
+  text-align: center;
+  z-index: 99;
+  &--main {
+    padding: 10px 10px;
+    background: #ccc;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+  }
+  &--icon{
+    margin-right: 5px;
+  }
+  &--success{
+    color: $m-success-color;
+    background: $m-message--success;
+    border-color: $m-success-color;
+  }
+  &--warning{
+    color: $m-warning-color;
+    background: $m-message--warning;
+    border-color: $m-warning-color;
+  }
+  &--error{
+    color: $m-danger-color;
+    background: $m-message--danger;
+    border-color: $m-danger-color;
+  }
+  .slide-fade-enter-active,.slide-fade-leave-active {
+    transition: all .5s ease;
+  }
+
+  .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active for below version 2.1.8 */ {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}

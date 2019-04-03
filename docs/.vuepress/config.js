@@ -8,7 +8,10 @@ module.exports = {
               collapsable: false,
               children: [
                 'components/button.md',
-                'components/alert.md',
+                'components/message.md',
+                'components/layout.md',
+                'components/confirm.md',
+                'components/pagination.md',
               ]
             },
           ]

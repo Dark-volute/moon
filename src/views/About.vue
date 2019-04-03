@@ -10,6 +10,9 @@
     </m-form>
     <m-button icon='loading' @click='submitForm'>提交</m-button>
     <m-button @click='restForm'>重置</m-button>
+    <m-button @click='$alert'>confirm</m-button>
+    <m-alert></m-alert>
+
   </div>
 </template>
 <script>
@@ -17,9 +20,10 @@ import mInput from '../components/input/input.vue'
 import mForm from '../components/form/form.vue'
 import mFormItem from '../components/form/form-item.vue'
 import mButton from '../components/button/button.vue'
+import mAlert from '../components/message/message.vue'
 
 export default {
-  components: { mForm, mFormItem, mInput,mButton},
+  components: { mForm, mFormItem, mInput,mButton, mAlert},
   data() {
     return {
       formValidate: {

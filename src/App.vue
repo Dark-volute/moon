@@ -9,23 +9,33 @@
            <m-col :span='6' style='border:1px solid red'>3</m-col> 
         </m-row>
         <span class='hidden-xs-only'>123</span> -->
-          <div id="nav">
+    <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link>|
+      <router-link to="/table">table</router-link>|
+      <router-link to="/table-slot">table-slot</router-link>|
+      <router-link to="/upload">upload</router-link>
     </div>
+
+    <m-cascader :source='source' :selected.sync='selected'></m-cascader>
+
+
+
     <router-view/>
     </div>
 </template>
 
 
 <script>
+
 import Vue from 'vue'
 import mButton from './components/button/button.vue'
+import mCascader from './components/cascader/cascader.vue'
 export default {
   name: 'app',
   data() {
     return {
-      selected: [],
+      selected:[],
       source: [
         {
           name: '江苏',
@@ -91,6 +101,7 @@ export default {
   mounted() {},
   components: {
     mButton,
+    mCascader
   }
 }
 </script>

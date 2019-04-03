@@ -1,21 +1,100 @@
-@include b(button){
-    font-size: $font-size; height: $button-height; padding: 0 1em;
-    border-radius: $border-radius; border: 1px solid $border-color;
-    background: $button-bg;
-    display: inline-flex; justify-content: center; align-items: center;
-    vertical-align: middle;
-    &:hover { border-color: $border-color-hover; }
-    &:active { background-color: $button-active-bg; }
-    &:focus { outline: none; }
-  
-    > .m-button-content { order: 2; }
-    > .icon { order: 1; margin-right: 0; margin-left: .2em;}
-  
-    &.icon-right {
-      > .m-button-content { order: 1; }
-      > .icon { order: 2; margin-right: 0; margin-left: .2em;}
+@include b(button) {
+  font-size: $font-size;
+  height: $button-height;
+  padding: 0 1em;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  background: $button-bg;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  cursor: pointer;
+  &:hover {
+    border-color: $border-color-hover;
+  }
+  &:active {
+    background-color: $button-active-bg;
+  }
+  &:focus {
+    outline: none;
+  }
+  > .m-button-content {
+    order: 2;
+  }
+  > .icon {
+    order: 1;
+    margin-right: 0;
+    margin-left: .2em;
+  }
+  &.icon-right {
+    > .m-button-content {
+      order: 1;
     }
-    .loading {
-      animation: spin 2s infinite linear;
+    > .icon {
+      order: 2;
+      margin-right: 0;
+      margin-left: .2em;
     }
   }
+  @include m(primary) {
+    &:hover {
+      border-color: $m-primary-color;
+      opacity: .8
+    }
+    &:active {
+      background-color: $m-primary-color;
+      opacity: 1
+    }
+    color: #fff;
+    background: $m-primary-color;
+    border-color: $m-primary-color
+  }
+  @include m(success) {
+    &:hover {
+      border-color: $m-success-color;
+      opacity: .8
+    }
+    &:active {
+      background-color: $m-success-color;
+      opacity: 1
+    }
+    color: #fff;
+    background: $m-success-color;
+    border-color: $m-success-color
+  }
+
+  @include m(warning) {
+    &:hover {
+      border-color: $m-warning-color;
+      opacity: .8
+    }
+    &:active {
+      background-color: $m-warning-color;
+      opacity: 1
+    }
+    color: #fff;
+    background: $m-warning-color;
+    border-color: $m-warning-color
+  }
+  @include m(danger) {
+    &:hover {
+      border-color: $m-danger-color;
+      opacity: .8
+    }
+    &:active {
+      background-color: $m-danger-color;
+      opacity: 1
+    }
+    color: #fff;
+    background: $m-danger-color;
+    border-color: $m-danger-color
+  }
+  @include m(disabled){
+    cursor: not-allowed
+  }
+  .loading {
+    animation: spin 2s infinite linear;
+  }
+}
+

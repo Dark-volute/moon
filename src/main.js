@@ -5,7 +5,8 @@ import './components/theme-chalk/index.scss'
 
 import Row from './components/row/row.js';
 import Col from './components/col/col.js';
-import Alert from './components/alert/alert.js';
+import Comfirm from './components/confirm/confirm.js';
+import Alert from './components/message/message.js';
 import Toast from './components/toast/toast.js';
 import router from './router'
 

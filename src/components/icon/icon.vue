@@ -1,6 +1,6 @@
 <template>
   <svg class="m-icon">
-    <use :xlink:href="`#i-${name}`"></use>
+    <use :xlink:href="`#icon-${name}`"></use>
   </svg>
 </template>
 <script>
@@ -11,5 +11,5 @@
   }
 </script>
 <style lang="scss" scoped>
-  .m-icon {width: 1em; height: 1em; }
+  .m-icon {width: 1em; height: 1em; color:red}
 </style>

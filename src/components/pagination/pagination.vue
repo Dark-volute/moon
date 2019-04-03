@@ -1,13 +1,14 @@
 <template>
     <div id="m-pagination">
-        <button type="button" class="btn-pre" @click="pre" :disabled="internalCurrentPage <= 1"><</button>
+        <button type="button" class="btn-pre" @click="pre" :disabled="internalCurrentPage <= 1"></button>
         <ul class="m-pager" v-if="total">
-            <li v-for="index in total"
+            <li v-for="index in displayTotal"
                 :class="{currentActive: internalCurrentPage === index}"
-                @click="currentChange(index)">{{index}}
+                @click="currentChange(index)">
+               {{index > 0 ? index : '...'}}
             </li>
         </ul>
-        <button type="button" class="btn-next" @click="next" :disabled="internalCurrentPage >= total">></button>
+        <button type="button" class="btn-next" @click="next" :disabled="internalCurrentPage >= total"></button>
         <jumper></jumper>
     </div>
 </template>
@@ -31,6 +32,22 @@
                 jumpWhichPage: ''
             }
         },
+        computed:{
+            displayTotal(){
+                const array = Array.from({length: this.total})
+                    .map((n,index) => index + 1)
+                    .filter(n => {
+                        if(n ===1) return true
+                        if(n === this.total) return true
+                        if(Math.abs(n - this.internalCurrentPage) <= 3) return true
+                    })
+                    .reduce((prev, n) => {
+                        const last = prev[prev.length - 1];
+                        return prev.concat(n - last > 1 ? [-1, n] : [n]);
+                    }, [])
+                return array
+            }
+        },
         watch: {
             currentPage: {
                 immediate: true,
@@ -50,6 +67,7 @@
                 this.$emit('next-click', ++this.internalCurrentPage)
             },
             currentChange(index) {
+                if(index === -1) return
                 this.internalCurrentPage = index
                 this.$emit('current-change', index)
             }
@@ -68,6 +86,7 @@
                 methods:{
                     jumpToPage(){
                         let page = parseInt(this.$refs.input.value)
+                        if(!page || page<1 || page > this.$parent.total) page = 1
                         this.$parent.internalCurrentPage = page
                         this.$parent.$emit('current-change', page)
                     }
@@ -75,7 +94,7 @@
                 render() {
                     return (
                         <span class="jumper">前往
-                          <input type="number" onBlur={this.jumpToPage}
+                          <input  type="number" onBlur={this.jumpToPage}
                           value={this.$parent.internalCurrentPage}
                           ref='input'/>
                           页</span>
@@ -96,27 +115,43 @@
         justify-content: center;
         align-items: center;
         button {
-            border: none;
             outline: none;
-            background-color: #fff;
+            border: none;
             cursor: pointer;
             font-size: 16px;
+            background: #eee;
+            height: 28px;
+            line-height: 28px;
+            border-radius: 4px;
+            text-align: center;
         }
         .btn-pre {
             padding-right: 12px;
+            &:before{
+                content: '<';
+            }
         }
         .m-pager {
             display: flex;
             margin: 0;
             padding: 0;
             .currentActive {
-                color: #409eff
+                color: #fff;
+                background: #409eff;
             }
             li {
                 display: inline-block;
+                box-sizing: border-box;
+                text-align: center;
+                border-radius: 4px;
+                height: 28px;
+                line-height: 28px;
                 padding: 0 5px;
+                margin: 0 5px;
                 font-weight: bold;
                 cursor: pointer;
+                min-width: 30px;
+                background: #eee;
                 &:hover {
                     color: #409eff;
                 }
@@ -124,6 +159,9 @@
         }
         .btn-next {
             padding-left: 12px;
+            &:before{
+                content: '>'
+            }
         }
         .jumper {
             input {
