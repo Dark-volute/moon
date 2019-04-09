@@ -15,6 +15,7 @@ module.exports = {
                 'components/form.md', 
                 'components/cascader.md', 
                 'components/tree.md',  
+                'components/upload.md',  
               ]
             },
           ]

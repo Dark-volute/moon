@@ -1,27 +1,21 @@
 <template>
-    <div class="gulu-uploader">
+    <div class="m-uploader">
         <div @click="onClickUpload">
-            <label>上传</label>
-            <div class='wrapper'>
-                <img :src='item.dataUrl' v-for='(item,index) in files' :key='index'>
-            </div>
+            <slot>
+                <label>+</label>
+            </slot>
         </div>
-        <ol class="gulu-uploader-fileList">
+        <ol class="m-uploader-fileList">
             <li v-for="file in fileList" :key="file.name">
-
                 <template v-if="file.status === 'uploading'">
-                    loading...
+                    loading..
                 </template>
-                <template v-else-if="file.type.indexOf('image') === 0">
-                    <img class="gulu-uploader-image" :src="file.url" width="32" height="32" alt="">
+                <template v-if="file.status === 'success'">
+                    <img class="m-uploader-image" :src="file.url" width="32" height="32" alt="">
                 </template>
-                <temaplte v-else>
-                    <div class="gulu-uploader-defaultImage"></div>
-                </temaplte>
 
-
-                <span class="gulu-uploader-name" :class="{[file.status]: file.status}">{{file.name}}</span>
-                <button class="gulu-uploader-remove" @click="onRemoveFile(file)">x</button>
+                <span class="m-uploader-name" :class="{[file.status]: file.status}">{{file.name}}</span>
+                <span class="m-uploader-remove" @click="onRemoveFile(file)">x</span>
             </li>
         </ol>
         <div ref="temp" style="width: 0; height: 0; overflow: hidden;"></div>
@@ -32,23 +26,21 @@
     import http from '../http'
     export default {
         name: "GuluUploader",
+        components: {},
         props: {
             name: {type: String, required: true},
             action: {type: String, required: true},
             method: {type: String, default: 'POST'},
-            parseResponse: {type: Function, required: true},
+            onSuccess: {type: Function, required: true},
             fileList: {type: Array, default: () => []},
             sizeLimit: {type: Number}
         },
         data () {
             return {
-                url: 'about:blank',
-                files: [
-                ]
+                url: 'about:blank'
             }
         },
         methods: {
-
             onClickUpload () {
                 let input = this.createInput()
                 input.addEventListener('change', (e) => {
@@ -58,13 +50,10 @@
                 input.click()
             },
             onRemoveFile (file) {
-                let answer = window.confirm('你确定要删除这玩意吗')
-                if (answer) {
                     let copy = [...this.fileList]
                     let index = copy.indexOf(file)
                     copy.splice(index, 1)
                     this.$emit('update:fileList', copy)
-                }
             },
             beforeUploadFiles (rawFiles, newNames) {
                 rawFiles = Array.from(rawFiles)
@@ -82,11 +71,11 @@
                 this.$emit('update:fileList', [...this.fileList, ...x])
                 return true
             },
-            afterUploadFiles (newName, url) {
+            afterUploadFiles (newName,res) {
                 let file = this.fileList.filter(f => f.name === newName)[0]
                 let index = this.fileList.indexOf(file)
                 let fileCopy = JSON.parse(JSON.stringify(file))
-                fileCopy.url = url
+                fileCopy.url = res.url
                 fileCopy.status = 'success'
                 let fileListCopy = [...this.fileList]
                 fileListCopy.splice(index, 1, fileCopy)
@@ -94,13 +83,6 @@
                 this.$emit('uploaded')
             },
             uploadFiles (rawFiles) {
-                const files = [...rawFiles]
-                files.forEach(file => {
-                    file.dataUrl = window.URL.createObjectURL(file)
-                })
-                this.files = files
-
-
                 let newNames = []
                 for (let i = 0; i < rawFiles.length; i++) {
                     let rawFile = rawFiles[i]
@@ -115,9 +97,9 @@
                     let formData = new FormData()
                     formData.append(this.name, rawFile)
                     this.doUploadFiles(formData, (response) => {
-                        let url = this.parseResponse(response)
-                        this.url = url
-                        this.afterUploadFiles(newName, url)
+                        this.onSuccess(response)
+
+                        this.afterUploadFiles(newName,response.data)
                     }, (xhr) => {
                         this.uploadError(xhr, newName)
                     })
@@ -163,14 +145,20 @@
     }
 </script>
 
+
 <style scoped lang="scss">
     label {
         display: inline-block;
         height: 100px;
+        line-height: 100px;
         width: 100px;
         border-radius: 4px;
         border: 1px dashed #000;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 500
     }
+
     .wrapper {
         display: flex;
         img {
@@ -179,14 +167,17 @@
             border-radius: 4px;
         }
     }
-    .gulu-uploader {
+
+    .m-uploader {
         &-fileList {
             list-style: none;
             > li {
                 display: flex;
                 align-items: center;
                 margin: 8px 0;
-                border: 1px solid darken(#ccc, 10%);
+                &:hover{
+                    background: #eee;;
+                }
             }
         }
         &-defaultImage {

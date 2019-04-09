@@ -30,11 +30,6 @@ export default new Router({
       path: '/table-slot',
       name: 'table',
       component: () => import('./views/Table-slot.vue')
-    },
-    {
-      path: '/upload',
-      name: 'upload',
-      component: () => import('./views/upload.vue')
     }
   ]
 })
