@@ -9,18 +9,22 @@
            <m-col :span='6' style='border:1px solid red'>3</m-col> 
         </m-row>
         <span class='hidden-xs-only'>123</span> -->
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>|
       <router-link to="/table">table</router-link>|
       <router-link to="/table-slot">table-slot</router-link>|
       <router-link to="/upload">upload</router-link>
-    </div>
+    </div> -->
 
     <m-cascader :source='source' :selected.sync='selected'></m-cascader>
 
+    <m-tree 
+     ref="tree"
+    :data='data' 
+     @change:checked='checkedChange'></m-tree>
 
-
+   <button @click='getCheckedNodes'>得到选中的接点</button>
     <router-view/>
     </div>
 </template>
@@ -31,10 +35,46 @@
 import Vue from 'vue'
 import mButton from './components/button/button.vue'
 import mCascader from './components/cascader/cascader.vue'
+import mTree from './components/tree/tree.vue'
 export default {
   name: 'app',
   data() {
     return {
+      keys:[1,2],
+      data:[{
+        id:1,
+        title:'node1',
+        children:[{
+          id:2,
+          title:'node2',
+          children:[{
+             id:4,
+             title:'node31',
+             children:[{
+               id:10,
+               title:'node4'
+             }]
+          },{
+             id:5,
+             title:'node3',
+          },{
+             id:6,
+             title:'node3',
+          }]
+        },{
+          disabled:true,
+          title:'node2',
+        },{
+           disabled:true,
+           checked:true,
+          title:'node2',
+        },{
+          title:'node2',
+        }]
+      },{
+        title:'node1'
+      }],
+
       selected:[],
       source: [
         {
@@ -76,8 +116,11 @@ export default {
   },
   created() {},
   methods: {
-    change(index) {
-      console.log(index)
+     getCheckedNodes() {
+        console.log(this.$refs.tree.getCheckedNodes());
+      },
+    checkedChange(current,checkedAll,node) {
+      console.log(current,checkedAll,node)
     },
     pre(index) {
       console.log(index)
@@ -101,7 +144,8 @@ export default {
   mounted() {},
   components: {
     mButton,
-    mCascader
+    mCascader,
+    mTree
   }
 }
 </script>

@@ -2,25 +2,25 @@
     <div class="cascader-item">
         <div class="left">
             <div v-for="(item,index) in source" :key='index'>
-                <div @click="select(item)" class="item" :class='{arrow: item && item.children}'>
+                <div @click="select(item)" class="item" :class='{"arrow-right": item && item.children}'>
                     <span>{{item.name}}</span>
                 </div>
             </div>
         </div>
 
         <div v-if="rightItems" class='right'>
-            <test-items 
+            <cascader-items 
             :source="rightItems" 
             :level='level+1' 
             :selected='selected' 
-            @update:selected='onUpdateSelected'></test-items>
+            @update:selected='onUpdateSelected'></cascader-items>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'testItems',
+  name: 'cascaderItems',
   data() {
     return {}
   },
@@ -61,7 +61,7 @@ export default {
 }
 </script>
 
-<style scoped lang='scss'>
+<style  lang='scss'>
 .cascader-item {
   display: flex;
   align-items: flex-start;
@@ -76,7 +76,7 @@ export default {
       &:hover {
         background: #eee;
       }
-      &.arrow:after {
+      &.arrow-right:after {
         font-family: element-icons;
         content: '>';
         font-size: 14px;

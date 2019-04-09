@@ -12,6 +12,9 @@ module.exports = {
                 'components/layout.md',
                 'components/confirm.md',
                 'components/pagination.md',
+                'components/form.md', 
+                'components/cascader.md', 
+                'components/tree.md',  
               ]
             },
           ]
