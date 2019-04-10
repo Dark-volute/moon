@@ -1,15 +1,23 @@
 <template>
   <svg class="m-icon">
-    <use :xlink:href="`#icon-${name}`"></use>
+    <use :xlink:href="`#icon-${name}`" :style='{fill}'></use>
   </svg>
 </template>
 <script>
   import '../svg'
   export default {
     name: 'Icon',
-    props: ['name']
+    props: {
+      name:{
+        type: String,
+        required: true,
+      },
+      fill: {
+        type:String
+      }
+    }
   }
 </script>
 <style lang="scss" scoped>
-  .m-icon {width: 1em; height: 1em; color:red}
+  .m-icon {width: 1.2em; height: 1.2em; color:red}
 </style>

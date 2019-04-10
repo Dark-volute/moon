@@ -8,7 +8,7 @@
 
 <h2>Code</h2>
 
-``` js{6}
+```vue
  <m-row>
      <m-col :span='6' >1</m-col>
      <m-col :span='6' >2</m-col>

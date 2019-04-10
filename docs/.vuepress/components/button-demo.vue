@@ -9,7 +9,6 @@
         <m-button type="warning">警告</m-button>
         <m-button type="danger">危险</m-button>
         </div>
-        <pre><code>{{demo}}</code></pre>
 
     </div>
 </template>
@@ -35,7 +34,6 @@
 </script>
 
 <style lang='scss'>
-
     @import '../../../src/components/theme-chalk/index';
 
 </style>

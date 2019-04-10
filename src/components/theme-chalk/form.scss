@@ -2,6 +2,7 @@
   @include b(form-item) {
     height: 50px;
     display: flex;
+    align-items: center;
     &>.label{
        height: 30px;
        line-height: 30px;

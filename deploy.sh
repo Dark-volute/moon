@@ -1,0 +1,1 @@
+ scp -r ./docs/.vuepress/dist ubuntu@94.191.43.237:/home/ubuntu/dist

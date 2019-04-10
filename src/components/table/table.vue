@@ -2,16 +2,13 @@
   <table>
     <thead>
       <tr>
-        <th v-for="col in columns">{{ col.title }}</th>
+        <th  v-for="col in columns" :key='col.title'>{{ col.title }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(row, rowIndex) in data">
-        <td v-for="col in columns">
-          <template v-if="'render' in col">
-            <Render :row="row" :column="col" :index="rowIndex" :render="col.render"></Render>
-          </template>
-          <template v-else-if="'slot' in col">
+      <tr v-for="(row, rowIndex) in data" :key='rowIndex'>
+        <td v-for="col in columns" :key='col.title'>
+          <template v-if="'slot' in col">
             <slot :row="row" :column="col" :index="rowIndex" :name="col.slot"></slot>
           </template>
           <template v-else>{{ row[col.key] }}</template>
@@ -42,12 +39,11 @@ export default {
 }
 </script>
 <style>
-table {
+/* table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: hidden;
-  border: 1px solid #e9e9e9;
 }
 table th {
   background: #f7f7f7;
@@ -57,8 +53,9 @@ table th {
 }
 table td,
 table th {
+  width: 100%;
   padding: 8px 16px;
   border: 1px solid #e9e9e9;
   text-align: left;
-}
+} */
 </style>

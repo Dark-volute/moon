@@ -19,25 +19,29 @@
             </li>
         </ol>
         <div ref="temp" style="width: 0; height: 0; overflow: hidden;"></div>
+        <div class='progress' ref='progress'></div>
     </div>
 </template>
 
 <script>
-    import http from '../http'
+    import ajax from '../ajax'
+
+
     export default {
-        name: "GuluUploader",
+        name: "mUploader",
         components: {},
         props: {
             name: {type: String, required: true},
             action: {type: String, required: true},
             method: {type: String, default: 'POST'},
             onSuccess: {type: Function, required: true},
+            onProgress: {type: Function, required: true},
             fileList: {type: Array, default: () => []},
             sizeLimit: {type: Number}
         },
         data () {
             return {
-                url: 'about:blank'
+                url: 'about:blank',
             }
         },
         methods: {
@@ -130,7 +134,7 @@
                 return name
             },
             doUploadFiles (formData, success, fail) {
-                http[this.method.toLowerCase()](this.action, {success, fail, data: formData})
+                ajax[this.method.toLowerCase()](this.action, {success, fail ,onProgress:this.onProgress,data: formData})
             },
             createInput () {
                 this.$refs.temp.innerHTML = ''
@@ -147,6 +151,12 @@
 
 
 <style scoped lang="scss">
+.progress{
+    width:0;
+    transition: 0.1s;
+    height:8px;
+    background: #ccc
+}
     label {
         display: inline-block;
         height: 100px;

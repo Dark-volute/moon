@@ -25,6 +25,9 @@
      @change:checked='checkedChange'></m-tree>
 
    <button @click='getCheckedNodes'>得到选中的接点</button>
+
+
+
     <router-view/>
     </div>
 </template>
@@ -40,6 +43,7 @@ export default {
   name: 'app',
   data() {
     return {
+        fileList:[],
       keys:[1,2],
       data:[{
         id:1,
@@ -145,7 +149,8 @@ export default {
   components: {
     mButton,
     mCascader,
-    mTree
+    mTree,
+      mUpload
   }
 }
 </script>
