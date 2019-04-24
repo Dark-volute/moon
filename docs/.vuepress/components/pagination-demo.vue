@@ -11,7 +11,3 @@
         components: {mPagination}
     }
 </script>
-
-<style scoped>
-
-</style>

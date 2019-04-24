@@ -9,7 +9,8 @@
           </span>
         </span>
         <input type='checkbox'
-               :disabled='data.disabled'   
+               :class="{'is-disabled':data.disabled}"
+               :disabled='data.disabled'
                v-model="data.checked"
                @input="handleCheck"/>
         <span class='title'>{{data.title}}</span>
@@ -59,7 +60,7 @@ export default {
     'data.children': {
       handler(data) {
         if (data) {
-          const checkedAll = !data.some(item => !item.checked)
+          const checkedAll = !data.filter(item => !item.disabled).some(item => !item.checked)
           this.$set(this.data, 'checked', checkedAll)
         }
       },
@@ -71,14 +72,6 @@ export default {
     handleExtend(data) {
       this.$set(this.data, 'expand', !this.data.expand)
 
-      const copy = this.defaultExpandedKeys.slice()
-      //   const index = copy.indexOf(data.id)
-      //   if (index > -1) {
-      //     copy.splice(index, 1)
-      //   } else {
-      //     copy.push(data.id)
-      //   }
-      //   this.tree.$emit('update:defaultExpandedKeys', copy)
     },
     handleCheck(e) {
       var checked = e.target.checked
@@ -88,7 +81,7 @@ export default {
     updateTreeDown(data, checked) {
       this.$set(data, 'checked', checked)
       if (data.children && data.children.length) {
-        data.children.forEach(item => {
+        data.children.filter(item => !item.disabled).forEach(item => {
           this.updateTreeDown(item, checked)
         })
       }
@@ -107,6 +100,9 @@ export default {
 }
 .is-expand{
     transform: rotate(90deg)
+}
+.is-disabled{
+    background: #eee;
 }
 
 .tree-ul {

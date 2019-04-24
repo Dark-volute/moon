@@ -1,6 +1,6 @@
 <template>
     <div id="m-pagination">
-        <button type="button" class="btn-pre" @click="pre" :disabled="internalCurrentPage <= 1"></button>
+        <button type="button" class="btn-pre" @click="pre" :disabled="internalCurrentPage <= 1"><m-icon name="zuojiantou"></m-icon></button>
         <ul class="m-pager" v-if="total">
             <li v-for="index in displayTotal"
                 :class="{currentActive: internalCurrentPage === index}"
@@ -8,12 +8,13 @@
                {{index > 0 ? index : '...'}}
             </li>
         </ul>
-        <button type="button" class="btn-next" @click="next" :disabled="internalCurrentPage >= total"></button>
+        <button type="button" class="btn-next" @click="next" :disabled="internalCurrentPage >= total"><m-icon name="youjiantou"></m-icon></button>
         <jumper></jumper>
     </div>
 </template>
 
 <script>
+    import mIcon from '../icon/icon.vue'
     export default {
         name: "pagination",
         props: {
@@ -73,6 +74,7 @@
             }
         },
         components: {
+            mIcon,
             jumper: {
                 data(){
                     return {
@@ -115,21 +117,20 @@
         justify-content: center;
         align-items: center;
         button {
+            padding:0;
             outline: none;
             border: none;
             cursor: pointer;
             font-size: 16px;
             background: #eee;
             height: 28px;
-            line-height: 28px;
             border-radius: 4px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .btn-pre {
-            padding-right: 12px;
-            &:before{
-                content: '<';
-            }
+        .btn-pre ,.btn-next{
+            padding: 0 6px;
         }
         .m-pager {
             display: flex;
@@ -155,12 +156,6 @@
                 &:hover {
                     color: #409eff;
                 }
-            }
-        }
-        .btn-next {
-            padding-left: 12px;
-            &:before{
-                content: '>'
             }
         }
         .jumper {

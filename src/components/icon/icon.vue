@@ -19,5 +19,5 @@
   }
 </script>
 <style lang="scss" scoped>
-  .m-icon {width: 1.2em; height: 1.2em; color:red}
+  .m-icon {width: 1.2em; height: 1.2em;}
 </style>

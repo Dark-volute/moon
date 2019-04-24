@@ -11,7 +11,6 @@ Alert
 表单验证
 级联选择器
 Tree
-Table
 等。。。
 
 

@@ -12,7 +12,7 @@
         components: {mButton},
         methods: {
             open(){
-                this.$confirm()
+                this.$confirm('haha','hi')
                     .then(() => {  })
                     .catch(() => {  })
             }
