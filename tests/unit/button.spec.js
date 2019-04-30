@@ -12,30 +12,30 @@ describe('Button.vue', () => {
     it('可以设置icon.', () => {
         const wrapper = mount(Button, {
             propsData: {
-                icon: 'settings'
+                icon: 'setting'
             }
         })
         const useElement = wrapper.find('use')
-        expect(useElement.attributes()['href']).to.equal('#i-settings')
+        expect(useElement.attributes()['href']).to.equal('#icon-setting')
     })
     it('可以设置loading.', () => {
         const wrapper = mount(Button, {
             propsData: {
-                icon: 'settings',
+                icon: 'setting',
                 loading: true
             }
         })
         const vm = wrapper.vm
         const useElements = vm.$el.querySelectorAll('use')
         expect(useElements.length).to.equal(1)
-        expect(useElements[0].getAttribute('xlink:href')).to.equal('#i-loading')
+        expect(useElements[0].getAttribute('xlink:href')).to.equal('#icon-loading')
     })
 
     it('icon 默认的 position 是 left', () => {
         const wrapper = mount(Button, {
             attachToDocument: true,
             propsData: {
-                icon: 'settings',
+                icon: 'setting',
             }
         })
 
